@@ -8,7 +8,7 @@ export default function AIChat () {
         throw new Error("AIChat must be rendered inside Context.Provider")
     }
 
-    const { systemText, setSystemText } = context
+    const { systemText } = context
 
     return (
         <>
@@ -17,7 +17,7 @@ export default function AIChat () {
             <div className="flex items-start space-x-2">
                 <div className="w-8 h-8 rounded-full bg-blue-500 shrink-0 flex items-center justify-center text-white text-xs font-bold">AI</div>
                 <div className="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-sm text-gray-800 max-w-[75%]">
-                    <p>Ciao! Come posso aiutarti oggi?</p>
+                    <p>{systemText}</p>
                     <span className="block text-[10px] text-gray-400 mt-1 text-right">10:00</span>
                 </div>
             </div>

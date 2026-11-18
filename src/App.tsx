@@ -1,5 +1,5 @@
 import ChatScreen from "./components/ChatScreen"
-import { useState, useEffect, createContext } from "react"
+import { useState, createContext } from "react"
 
 type ChatContextType = {
   systemText: string | null
@@ -13,8 +13,7 @@ export const Context = createContext<ChatContextType | null>(null)
 export default function App() {
   const [systemText, setSystemText] = useState<string | null>("Hi, how can I help you?")
   const [userText, setUserText] = useState<string | null>("Can you please find me the top 3 movies by RottenTomatoes rank of 2025?")
-  const [userInput, setUserInput] = useState<string | null>("")
-  
+
   return (
     <>
     <Context.Provider value={
