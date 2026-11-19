@@ -1,26 +1,41 @@
 import ChatScreen from "./components/ChatScreen"
 import { useState, createContext } from "react"
 
-type ChatContextType = {
-  systemText: string | null
-  setSystemText: React.Dispatch<React.SetStateAction<string | null>>
-  userText: string | null
-  setUserText: React.Dispatch<React.SetStateAction<string | null>>
+export type ChatContextType = {
+  message: {
+    role: string | null,
+    content: string | null
+  } | null
+  setMessage: React.Dispatch<React.SetStateAction<ChatContextType["message"]>>
+  loading: boolean
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const Context = createContext<ChatContextType | null>(null)
 
 export default function App() {
-  const [systemText, setSystemText] = useState<string | null>("Hi, how can I help you?")
-  const [userText, setUserText] = useState<string | null>("Can you please find me the top 3 movies by RottenTomatoes rank of 2025?")
+  const [message, setMessage] = useState<ChatContextType["message"]>(null)
+  const [loading, setLoading] = useState<boolean>(false)
 
   return (
     <>
-    <Context.Provider value={
-      {systemText, setSystemText, userText, setUserText}
-    }>
-     <ChatScreen />
-     </Context.Provider>
+      <Context.Provider value={
+        {message, setMessage, loading, setLoading}
+      }>
+      <ChatScreen />
+      </Context.Provider>
     </>
   )
 }
+
+/*
+
+old elements
+
+  {userText: string | null
+  setUserText: React.Dispatch<React.SetStateAction<string | null>>
+  inputText: string | null
+  setInputText: React.Dispatch<React.SetStateAction<string | null>>}
+
+/*const [userText, setUserText] = useState<string | null>("Can you please find me the top 3 movies by RottenTomatoes rank of 2025?")
+  const [inputText, setInputText] = useState<string | null>("")*/

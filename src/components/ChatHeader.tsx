@@ -6,7 +6,7 @@ export default function ChatHeader() {
             </div>
             <div className="flex-col">
                 <div className="text-md text-gray-800 font-medium">
-                    <h2>AI Chatbot</h2>
+                    <h2>AI RudeBot</h2>
                 </div>
                 <div className="text-sm">
                     <p>Online</p>
