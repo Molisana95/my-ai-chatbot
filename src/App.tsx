@@ -1,11 +1,13 @@
 import ChatScreen from "./components/ChatScreen"
 import { useState, createContext } from "react"
 
+export type ChatMessage = {
+  role: "user" | "system" | "assistant"
+  content: string
+}
+
 export type ChatContextType = {
-  message: {
-    role: string | null,
-    content: string | null
-  } | null
+  message: ChatMessage[]
   setMessage: React.Dispatch<React.SetStateAction<ChatContextType["message"]>>
   loading: boolean
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
@@ -14,7 +16,7 @@ export type ChatContextType = {
 export const Context = createContext<ChatContextType | null>(null)
 
 export default function App() {
-  const [message, setMessage] = useState<ChatContextType["message"]>(null)
+  const [message, setMessage] = useState<ChatMessage[]>([])
   const [loading, setLoading] = useState<boolean>(false)
 
   return (

@@ -4,16 +4,23 @@ import { OpenRouter } from '@openrouter/sdk'
 // declaring Node type - need to check this better, although it works
 declare const process: { env: Record<string, string | undefined> }
 // declaring customise types -> must remember to use specific role and content types, can't be "null"
-type MessageContent =
+export type MessageContent =
   | { role: "system"; content: string }
   | { role: "user"; content: string }
+  | { role: "assistant"; content: string }
 
 export const handler: Handler = async (event: HandlerEvent) => {
     // check if the req is valid
     let userTextInput = ''
     if(event.body) {
         try {
-            userTextInput = JSON.parse(event.body)
+            const body = JSON.parse(event.body ?? "{}") as { userTextInput?: unknown }
+
+            if (typeof body.userTextInput !== "string" || !body.userTextInput.trim()) {
+            return { statusCode: 400, body: JSON.stringify({ error: "Missing userTextInput" }) }
+            }
+
+            userTextInput = body.userTextInput.trim()
         } catch {
             return {
                 statusCode: 400,
@@ -73,7 +80,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
 
         if (typeof reply === 'string' && reply) {
             messages.push({
-                role: "system",
+                role: "assistant",
                 content: reply
             })
         } else {
@@ -81,7 +88,10 @@ export const handler: Handler = async (event: HandlerEvent) => {
         }
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: messages })
+            body: JSON.stringify({ messages: [
+                {role: "user", content: userTextInput},
+                {role: "assistant", content: reply}
+            ] })
         }
     } catch (err) {
         console.error('Error calling OpenRouter:', err);

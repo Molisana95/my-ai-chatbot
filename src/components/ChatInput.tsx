@@ -1,6 +1,6 @@
 import { Context } from "../App"
 import { useContext, useRef } from "react"
-
+import type { ChatMessage } from "../App"
 export default function ChatInput() {
     const context = useContext(Context)
         if(!context) {
@@ -27,8 +27,8 @@ export default function ChatInput() {
             if(!response.ok) {
                 throw new Error(`Error-status: ${response.status}`)
             }
-            const data = await response.json()
-            setMessage(data)
+            const data: { messages: ChatMessage[] } = await response.json()
+            setMessage(current => [...current, ...data.messages])
         } catch(err) {
             console.error("Error fetching data", err)
         } finally {

@@ -10,8 +10,7 @@ export default function AIChat () {
 
     const { message }: ChatContextType = context
 
-    const fullChat = message === null ? [] : [message]
-    const mappedChat = fullChat.length === 0 ? <p>Hello</p> : fullChat.map((m) => {
+    const mappedChat = message.length === 0 ? <p>Hello</p> : message.map((m) => {
         return (
             <div className="flex items-start space-x-2">
                 <div className="w-8 h-8 rounded-full bg-blue-500 shrink-0 flex items-center justify-center text-white text-xs font-bold">{m.role === "assistant" ? "AI" : "User"}</div>
