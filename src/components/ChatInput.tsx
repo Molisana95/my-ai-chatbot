@@ -1,6 +1,7 @@
 import { Context } from "../App"
 import { useContext, useRef } from "react"
 import type { ChatMessage } from "../App"
+
 export default function ChatInput() {
     const context = useContext(Context)
         if(!context) {
@@ -10,9 +11,11 @@ export default function ChatInput() {
 
     const textRef = useRef<HTMLTextAreaElement>(null)
 
-    async function handleSubmit (): Promise<void> {
+    
+    async function handleSubmit () {
         const text = textRef.current?.value.trim()
         if(!text) return
+        setMessage(current => [...current, { role: "user", content: text }])
         setLoading(true)
         try {
             const response = await fetch ("/.netlify/functions/serverless-ai", {
@@ -28,7 +31,7 @@ export default function ChatInput() {
                 throw new Error(`Error-status: ${response.status}`)
             }
             const data: { messages: ChatMessage[] } = await response.json()
-            setMessage(current => [...current, ...data.messages])
+            setMessage(current => [...current, ...data.messages.filter(m => m.role === "assistant")])
         } catch(err) {
             console.error("Error fetching data", err)
         } finally {
@@ -47,3 +50,13 @@ export default function ChatInput() {
         </>
     )
 }
+
+/*
+ 
+    <div className="flex items-start justify-end space-x-2">
+        <div className="bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-sm max-w-[75%]">
+            <p>{text}</p>
+            <span className="block text-[10px] text-blue-200 mt-1 text-right">10:01</span>
+        </div>
+    </div>
+*/
