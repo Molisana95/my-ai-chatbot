@@ -9,10 +9,11 @@ export default function AIChat () {
     }
 
     const { message }: ChatContextType = context
+    console.log(message)
 
-    const mappedChat = message.length === 0 ? <p>Hello</p> : message.map((m) => {
+    const mappedChat = message.length === 0 ? <p>Hello</p> : message.map((m, index) => {
         return (
-            <div className="flex items-start space-x-2">
+            <div className="flex items-start space-x-2" key={`chat-n-${index}`}>
                 <div className="w-8 h-8 rounded-full bg-blue-500 shrink-0 flex items-center justify-center text-white text-xs font-bold">
                     {m.role === "assistant" ? "AI" : "User"}
                 </div>

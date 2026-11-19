@@ -9,7 +9,7 @@ export default function ChatInput() {
         }
     const { setMessage, setLoading } = context
 
-    const textRef = useRef<HTMLTextAreaElement>(null)
+    let textRef = useRef<HTMLTextAreaElement>(null)
 
     
     async function handleSubmit () {
