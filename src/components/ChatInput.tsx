@@ -6,7 +6,7 @@ export default function ChatInput() {
         if(!context) {
             throw new Error("A context error occurred")
         }
-    const { setMessage, loading, setLoading } = context
+    const { setMessage, setLoading } = context
 
     const textRef = useRef<HTMLTextAreaElement>(null)
 
