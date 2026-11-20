@@ -45,7 +45,8 @@ export const handler: Handler = async (event: HandlerEvent) => {
     // setting up openai
 
     const openai = new OpenRouter({
-        apiKey: apiKey
+        apiKey: apiKey,
+        serverURL: "https://openrouter.ai/api/v1"
     });
 
     // setting up a system message to instruct the AI how to behave with the user

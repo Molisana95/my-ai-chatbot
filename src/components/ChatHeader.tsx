@@ -8,7 +8,7 @@ export default function ChatHeader() {
                 <div className="text-md text-gray-800 font-medium">
                     <h2>AI RudeBot</h2>
                 </div>
-                <div className="text-sm">
+                <div className="text-sm text-green-600">
                     <p>Online</p>
                 </div>
             </div>

@@ -11,7 +11,11 @@ export default function AIChat () {
     const { message, loading }: ChatContextType = context
     console.log(message)
 
-    const mappedChat = message.length === 0 ? <p>Hello</p> : message.map((m, index) => {
+    const mappedChat = message.length === 0 ? (
+        <div className="bg-green-100 rounded-2xl p-4">
+            <p>Don't dare waking up the AI...(you can start your chat below)</p>
+        </div>
+    ) : message.map((m, index) => {
         return (
             <div className={m.role === "assistant" ? "flex items-start space-x-3 w-full" : "flex items-start space-x-3 w-full justify-end"} key={`chat-n-${index}`}>
                 <div className="w-8 h-8 rounded-full bg-blue-500 shrink-0 flex items-center justify-center text-white text-xs font-bold">
