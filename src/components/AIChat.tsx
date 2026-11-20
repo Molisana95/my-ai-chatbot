@@ -8,7 +8,7 @@ export default function AIChat () {
         throw new Error("A context error occurred")
     }
 
-    const { message }: ChatContextType = context
+    const { message, loading }: ChatContextType = context
     console.log(message)
 
     const mappedChat = message.length === 0 ? <p>Hello</p> : message.map((m, index) => {
@@ -35,6 +35,7 @@ export default function AIChat () {
         <>
         <div className="flex-1 p-4 overflow-y-auto space-y-5 bg-gray-50">
             {mappedChat}
+            {loading && <p>The AI is writing...</p>}
         </div>
         </>
     ) 
