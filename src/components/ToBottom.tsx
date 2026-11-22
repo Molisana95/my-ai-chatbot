@@ -1,5 +1,5 @@
 import bottomIcon from "../assets/down-line-svgrepo-com.svg"
-
+//the type for the ref values is new to me. Better to remember for the next time
 type ToBottomProp = {
     scrollRef: React.RefObject<HTMLDivElement | null>
 }

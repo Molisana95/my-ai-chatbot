@@ -5,22 +5,29 @@ import ToBottom from "./ToBottom"
 
 
 export default function AIChat () {
+    // checking whether the user is watching older messages
     const [isPastMsg, setIsPastMsg] = useState<boolean>(false)
+
+    // saving the ref of the scroll in order to activate the scrollIntoView() function
     const scrollRef = useRef<HTMLDivElement | null>(null)
     
     const context = useContext(Context)
     if(!context) {
         throw new Error("A context error occurred")
-    }
+    } // checking the context otherwise Typescript YELLS at me
 
     const { message, loading }: ChatContextType = context
 
+    //the type for the event is new for me, so better remember it for the next time.
+    //function used to derive the value in px of the distance from the bottom of the page and set the state value (isPastMsg) whose ToBottom and scrollIntoView() are depending on
     function handleScroll (e: React.UIEvent<HTMLDivElement>) {
         const {scrollTop, scrollHeight, clientHeight} = e.currentTarget
         const distanceFromBottom = scrollHeight - (scrollTop + clientHeight)
         setIsPastMsg(distanceFromBottom > 60 ? true : false)
     }
 
+    //implementing the scrollIntoView(), so that when the user receives a new message 
+    //the page will scroll down to the bottom IF the user is not checking previous messages, otherwise the button will appear
     useEffect(() => {
         if(!isPastMsg) {
             scrollRef.current?.scrollIntoView({ behavior: "auto" })
