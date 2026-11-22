@@ -44,10 +44,10 @@ export default function ChatInput() {
 
     return (
         <>
-            <div className="flex items-center px-4 justify-between gap-2 bottom-0 h-14 bg-gray-200">
-                <textarea placeholder="Message..." rows={1} ref={textRef} className="flex-1 resize-none bg-gray-100 border-gray-500 px-3 py-1.5 rounded-3xl w-full"></textarea>
-                <button className="rounded-2xl p-1" onClick={handleSubmit} disabled={loading ? true : false} >
-                    <img src={sendIcon} className="w-9 bg-gray-500 hover:bg-green-900 active:bg-green-700 rounded-2xl p-1"/>
+            <div className="flex items-center px-4 justify-between gap-2 bottom-0 h-14 sm:h-40 bg-gray-200">
+                <textarea placeholder="Message..." rows={1} ref={textRef} className="flex-1 resize-none bg-gray-100 border-gray-500 px-3 py-1.5 rounded-3xl w-full sm:h-30 sm:p-5 sm:text-xl"></textarea>
+                <button className="rounded-2xl p-1 self-center" onClick={handleSubmit} disabled={loading ? true : false} >
+                    <img src={sendIcon} className="w-9 sm:w-13 bg-gray-500 hover:bg-green-900 active:bg-green-700 rounded-2xl p-1"/>
                 </button>
             </div>
         </>
